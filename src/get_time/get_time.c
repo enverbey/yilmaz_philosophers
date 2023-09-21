@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: envyilma <envyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 15:40:53 by envyilma          #+#    #+#             */
-/*   Updated: 2023/09/21 16:55:07 by envyilma         ###   ########.fr       */
+/*   Created: 2023/09/21 15:59:14 by envyilma          #+#    #+#             */
+/*   Updated: 2023/09/21 16:56:29 by envyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	is_number(char *s)
-{
-	int	i;
+#include <sys/time.h>
+#include <unistd.h>
 
-	i = -1;
-	while (i++, s[i])
-	{
-		if (!(s[i] >= '0' && s[i] <= '9'))
-			return (-1);
-	}
-	return (1);
+u_int64_t	get_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }
 
-int	checker(int ac, char **av)
+int	ft_usleep(useconds_t time)
 {
-	int	i;
+	u_int64_t	start;
 
-	if (ac != 5 && ac != 6)
-		return (-1);
-	i = 0;
-	while (i++, av[i])
-	{
-		if (is_number(av[i]) == -1)
-			return (-1);
-	}
-	return (1);
+	start = get_time();
+	while ((get_time() - start) < time)
+		usleep(time / 10);
+	return (0);
 }

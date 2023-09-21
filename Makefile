@@ -1,9 +1,15 @@
 NAME	=	philo
 FLAG	=	-Wall -Wextra -Werror
 
-SRC	=	./src/checker/checker.c \
+SRC	=	./src/checker/check_death.c \
+		./src/checker/checker.c \
+		./src/ft_output/ft_message.c \
+		./src/get_time/get_time.c \
 		./src/libft/ft_atoi.c \
-		./src/main/main.c
+		./src/main/eat.c \
+		./src/main/main.c \
+		./src/sets/set_philo.c \
+		./src/sets/set_table.c
 
 
 all: $(NAME)
