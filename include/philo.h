@@ -6,7 +6,7 @@
 /*   By: envyilma <envyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:23:28 by envyilma          #+#    #+#             */
-/*   Updated: 2023/09/21 16:54:37 by envyilma         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:27:13 by envyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_table
 	pthread_t		check_dead;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
+	pthread_mutex_t	mutex_break_eat;
+	pthread_mutex_t	mutex_total_meal;
 	u_int64_t		start;
 	int				number_of_p;
 	int				time_eat;
@@ -36,14 +38,18 @@ typedef struct s_philo
 	pthread_t		philo_id;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	mutex_w_eat;
 	int				number;
 	int				time_without_eat;
 	t_table			*table;
 }	t_philo;
 
-// -> checker for inpu
+// -> checker
 void		*check_death(void *philos);
 int			checker(int ac, char **av);
+
+// -> free
+void		free_everything(t_philo *philos);
 
 // -> output
 void		ft_message(char *str, t_philo *philo);

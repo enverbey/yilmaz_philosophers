@@ -1,8 +1,9 @@
 NAME	=	philo
-FLAG	=	-Wall -Wextra -Werror
+FLAG	=	-Wall -Wextra -Werror# -pthread -fsanitize=thread -g
 
 SRC	=	./src/checker/check_death.c \
 		./src/checker/checker.c \
+		./src/free/free_everything.c \
 		./src/ft_output/ft_message.c \
 		./src/get_time/get_time.c \
 		./src/libft/ft_atoi.c \
@@ -16,6 +17,7 @@ all: $(NAME)
 
 $(NAME):
 	@gcc $(FLAG) $(SRC) -o $(NAME)
+	@rm -rf philo.dSYM
 	@printf "\n\033[92m   Downloading... \033[0m\n  "
 	@printf "\033[92m █"
 	@sleep 0.01

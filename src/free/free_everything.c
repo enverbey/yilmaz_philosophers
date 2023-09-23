@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_message.c                                       :+:      :+:    :+:   */
+/*   free_everything.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: envyilma <envyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 16:07:13 by envyilma          #+#    #+#             */
-/*   Updated: 2023/09/23 18:21:54 by envyilma         ###   ########.fr       */
+/*   Created: 2023/09/21 18:16:48 by envyilma          #+#    #+#             */
+/*   Updated: 2023/09/23 13:29:07 by envyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
-#include <stdio.h>
+#include <stdlib.h>
 
-void	ft_message(char *str, t_philo *philo)
+void	free_everything(t_philo *philos)
 {
-	pthread_mutex_lock(&philo->table->print);
-	pthread_mutex_lock(&philo->table->mutex_break_eat);
-	if (philo->table->break_eat != 1)
-		printf("%llu %d. %s",
-			get_time() - philo->table->start, philo->number, str);
-	pthread_mutex_unlock(&philo->table->mutex_break_eat);
-	pthread_mutex_unlock(&philo->table->print);
+	int		i;
+	t_table	*table;
+
+	i = -1;
+	table = philos->table;
+	while (i++, i < table->number_of_p)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		pthread_mutex_destroy(&philos->mutex_w_eat);
+	}
+	pthread_mutex_destroy(&table->print);
+	pthread_mutex_destroy(&table->mutex_break_eat);
+	pthread_mutex_destroy(&table->mutex_total_meal);
+	free(table->forks);
+	free(philos);
 }

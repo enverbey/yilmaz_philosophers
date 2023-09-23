@@ -6,12 +6,11 @@
 /*   By: envyilma <envyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:24:43 by envyilma          #+#    #+#             */
-/*   Updated: 2023/09/21 16:57:02 by envyilma         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:12:54 by envyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
-#include <pthread.h>
 #include <stdio.h>
 
 void	start_philo(t_table *table, t_philo **philolar)
@@ -41,4 +40,5 @@ int	main(int ac, char **av)
 	set_table(&table, av);
 	set_philos(&table, &philos);
 	start_philo(&table, &philos);
+	free_everything(philos);
 }
